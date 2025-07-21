@@ -114,7 +114,7 @@ CREATE TABLE shoe_order_customer_product(
   sale_price INT,
   rating DOUBLE
 )WITH (
-    'changelog.mode' = 'retract'
+    'changelog.mode' = 'append'
 );
 ```
 
@@ -131,19 +131,19 @@ INSERT INTO shoe_order_customer_product(
   rating)
 SELECT
   so.order_id,
-  sc.first_name,
-  sc.last_name,
-  sc.email,
-  sp.brand,
-  sp.`model`,
-  sp.sale_price,
-  sp.rating
+  shoe_customers_keyed.first_name,
+  shoe_customers_keyed.last_name,
+  shoe_customers_keyed.email,
+  shoe_products_keyed.brand,
+  shoe_products_keyed.`model`,
+  shoe_products_keyed.sale_price,
+  shoe_products_keyed.rating
 FROM 
   shoe_orders so
-  INNER JOIN shoe_customers_keyed sc 
-    ON so.customer_id = sc.customer_id
-  INNER JOIN shoe_products_keyed sp
-    ON so.product_id = sp.product_id;
+  INNER JOIN shoe_customers_keyed FOR SYSTEM_TIME AS OF so.`$rowtime` 
+    ON so.customer_id = shoe_customers_keyed.customer_id
+  INNER JOIN shoe_products_keyed FOR SYSTEM_TIME AS OF so.`$rowtime` 
+    ON so.product_id = shoe_products_keyed.product_id;
 ```
 
 Verify that the data was joined successfully. 
