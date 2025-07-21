@@ -45,9 +45,9 @@ Your Kafka cluster should have three Datagen Source Connectors running. Check if
 
 | Connector Name (can be anything)     |      Topic      | Format |             Template | 
 |--------------------------------------|:---------------:|-------:|---------------------:|
-| **DatagenSourceConnector_products**  |  shoe_products  |   AVRO |            **Shoes** | 
-| **DatagenSourceConnector_customers** | shoe_customers  |   AVRO |  **Shoes customers** | 
-| **DatagenSourceConnector_orders**    |   shoe_orders   |   AVRO |     **Shoes orders** | 
+| **shoe_product_gen**  |  shoe_products  |   AVRO |            **Shoes** | 
+| **shoe_customer_gen** | shoe_customers  |   AVRO |  **Shoes customers** | 
+| **shoe_order_gen**    |   shoe_orders   |   AVRO |     **Shoes orders** | 
 
 ## 2. Create Pool
 

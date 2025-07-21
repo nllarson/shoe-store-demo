@@ -62,7 +62,7 @@ Create Topic by clicking (left.hand menu) Topics and then click `Create topic` b
 Three topics are created.
 ![image](terraform/img/topics.png)
 
-### Create Sample Data connectors to fill the topics `show_products` and `shoe_customers` and `shoe_orders`
+### Create Sample Data connectors to fill the topics `shoe_products` and `shoe_customers` and `shoe_orders`
 Confluent has the Datagen connector, which is a testdata generator. In Confluent Cloud a couple Quickstarts (predefinied data) are available and will generate data of a given format.
 NOTE: We use Datagen with following templates:
 * Shoe Products https://github.com/confluentinc/kafka-connect-datagen/blob/master/src/main/resources/shoes.avro
@@ -76,15 +76,15 @@ Choose the `Connectors` menu entry (left site) and search for `Sample Data`. Cli
 * Check Summary, we will go with one Task (slider) and click `Continue`
 * Enter a name `DSoC_products` and finally click `Continue` 
 
-Now, events will fly in topic `shoe_products` generated from datagen connector `DSoC_products`
+Now, events will fly in topic `shoe_products` generated from datagen connector `shoe_product_gen`
 ![image](terraform/img/shoe_products.png)
 
 If you click on `Stream Lineage` (left side) and will see your current data pipeline. Click on topic `shoe_products` and enter the description `Shoe products`. This is how you place metadata to your data product.
 ![image](terraform/img/streamlineage.png)
 
 Go back to your Cluster `cc_handson_cluster` and create two more datagen connectors to fill the topics shoe_customers and shoe_orders, go to `Connectors` and click `Add Connector`. Pay attention when you select the template for the datagen connector and ensure, that it corresponds with the before selected topic as shown in the following. Deviations in this step will result in invalid queries at later stages in the workshop.
-* Connector Plug-in `Sample Data`, Topic `shoe_customers`, Global Access amd Download API Key with Description `Datagen Connector Customers`, Format `AVRO`, template `Shoe customers`, 1 Task, Connector Name `DSoC_customers` 
-* Connector Plug-in `Sample Data`, Topic `shoe_orders`, Global Access amd Download API Key with Description `Datagen Connector Orders`, Format `AVRO`, template `Shoe orders`, 1 Task, Connector Name `DSoC_orders` 
+* Connector Plug-in `Sample Data`, Topic `shoe_customers`, Global Access amd Download API Key with Description `Datagen Connector Customers`, Format `AVRO`, template `Shoe customers`, 1 Task, Connector Name `shoe_customers_gen` 
+* Connector Plug-in `Sample Data`, Topic `shoe_orders`, Global Access amd Download API Key with Description `Datagen Connector Orders`, Format `AVRO`, template `Shoe orders`, 1 Task, Connector Name `shoe_orders_gen` 
 
 Three Connectors are up and running and are generating data for us.
 ![image](terraform/img/connectors.png)
